@@ -23,7 +23,7 @@ public enum GameFontFamilyAndSize
     ///
     /// Contains Japanese characters in addition to Latin characters. Used in game for the whole UI.
     /// </summary>
-    [GameFontFamilyAndSize("common/font/chnaxis_120.fdt", "common/font/font_chn_{0}.tex", -1)]
+    [GameFontFamilyAndSize("common/font/tcaxis_120.fdt", "common/font/font_tc_{0}.tex", -1)]
     Axis12,
 
     /// <summary>
@@ -31,7 +31,7 @@ public enum GameFontFamilyAndSize
     ///
     /// Contains Japanese characters in addition to Latin characters. Used in game for the whole UI.
     /// </summary>
-    [GameFontFamilyAndSize("common/font/chnaxis_140.fdt", "common/font/font_chn_{0}.tex", -1)]
+    [GameFontFamilyAndSize("common/font/tcaxis_140.fdt", "common/font/font_tc_{0}.tex", -1)]
     Axis14,
 
     /// <summary>
@@ -39,7 +39,7 @@ public enum GameFontFamilyAndSize
     ///
     /// Contains Japanese characters in addition to Latin characters. Used in game for the whole UI.
     /// </summary>
-    [GameFontFamilyAndSize("common/font/chnaxis_180.fdt", "common/font/font_chn_{0}.tex", -1)]
+    [GameFontFamilyAndSize("common/font/tcaxis_180.fdt", "common/font/font_tc_{0}.tex", -1)]
     Axis18,
 
     /// <summary>
@@ -47,7 +47,7 @@ public enum GameFontFamilyAndSize
     ///
     /// Contains Japanese characters in addition to Latin characters. Used in game for the whole UI.
     /// </summary>
-    [GameFontFamilyAndSize("common/font/chnaxis_360.fdt", "common/font/font_chn_{0}.tex", -4)]
+    [GameFontFamilyAndSize("common/font/tcaxis_360.fdt", "common/font/font_tc_{0}.tex", -4)]
     Axis36,
 
     /// <summary>

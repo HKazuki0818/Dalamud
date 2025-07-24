@@ -26,7 +26,12 @@ public enum ClientLanguage
     French,
 
     /// <summary>
-    /// Indicating a French game client.
+    /// Indicating a ChineseSimplified game client.
     /// </summary>
     ChineseSimplified,
+    
+    /// <summary>
+    /// Indicating a ChineseTraditional game client.
+    /// </summary>
+    ChineseTraditional,
 }

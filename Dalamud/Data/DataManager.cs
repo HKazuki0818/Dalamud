@@ -16,6 +16,7 @@ using Lumina.Excel.Sheets;
 
 using Newtonsoft.Json;
 using Serilog;
+using Framework = FFXIVClientStructs.FFXIV.Client.System.Framework.Framework;
 
 namespace Dalamud.Data;
 
@@ -136,11 +137,11 @@ internal sealed class DataManager : IInternalDisposableService, IDataManager
 
     /// <inheritdoc/>
     public ExcelSheet<T> GetExcelSheet<T>(ClientLanguage? language = null, string? name = null) where T : struct, IExcelRow<T>
-        => this.Excel.GetSheet<T>(ClientLanguage.ChineseSimplified.ToLumina(), name);
+        => this.Excel.GetSheet<T>(language?.ToLumina(), name);
 
     /// <inheritdoc/>
     public SubrowExcelSheet<T> GetSubrowExcelSheet<T>(ClientLanguage? language = null, string? name = null) where T : struct, IExcelSubrow<T>
-        => this.Excel.GetSubrowSheet<T>(ClientLanguage.ChineseSimplified.ToLumina(), name);
+        => this.Excel.GetSubrowSheet<T>(language?.ToLumina(), name);
 
     /// <inheritdoc/>
     public FileResource? GetFile(string path)
