@@ -47,17 +47,17 @@ public class ProxySettingsEntry : SettingsEntry
 
     public override void Draw()
     {
-        ImGui.Text("代理设置");
+        ImGui.Text("代理設置");
         
-        ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudRed, "设置 Dalamud 所使用的网络代理, 会影响到插件库的连接, 保存后重启游戏生效");
+        ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudRed, "設置Dalamud所使用的網路代理，會影響到插件庫的連接，保存後重啟遊戲生效");
         
-        ImGui.Checkbox("手动配置代理", ref this.useManualProxy);
+        ImGui.Checkbox("手動配置代理", ref this.useManualProxy);
         
         if (this.useManualProxy)
         {
-            ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudGrey, "若不清楚下方选项的具体作用, 请勿修改");
+            ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudGrey, "在更改下方選項時，請確保你知道你在做什麼，否則不要隨便更改");
             
-            ImGui.Text("协议");
+            ImGui.Text("協議");
             
             ImGui.SameLine();
             ImGui.Combo("##proxyProtocol", ref this.proxyProtocolIndex, this.proxyProtocols, this.proxyProtocols.Length);
@@ -75,9 +75,9 @@ public class ProxySettingsEntry : SettingsEntry
             this.proxyProtocol = this.proxyProtocols[this.proxyProtocolIndex];
         }
 
-        using (ImRaii.Disabled(this.proxyStatus == "测试中"))
+        using (ImRaii.Disabled(this.proxyStatus == "測試中"))
         {
-            if (ImGui.Button("测试网站连通性"))
+            if (ImGui.Button("測試網站連通姓"))
             {
                 Task.Run(() => TestUrlConnectivityAsync(this.selfTestUrl));
             }
@@ -88,25 +88,25 @@ public class ProxySettingsEntry : SettingsEntry
         var proxyStatusColor = ImGuiColors.DalamudWhite;
         switch (this.proxyStatus)
         {
-            case "测试中":
+            case "測試中":
                 proxyStatusColor = ImGuiColors.DalamudYellow;
                 break;
             case "有效":
                 proxyStatusColor = ImGuiColors.ParsedGreen;
                 break;
-            case "无效":
+            case "無效":
                 proxyStatusColor = ImGuiColors.DalamudRed;
                 break;
         }
 
-        ImGui.TextColored(proxyStatusColor, $"代理测试结果: {this.proxyStatus}");
+        ImGui.TextColored(proxyStatusColor, $"代理測試結果： {this.proxyStatus}");
     }
 
     private async Task TestUrlConnectivityAsync(string url = "https://raw.githubusercontent.com/AtmoOmen/Dalamud/master/global.json")
     {
         try
         {
-            this.proxyStatus = "测试中";
+            this.proxyStatus = "測試中";
         
             var handler = new HttpClientHandler();
             if (this.useManualProxy)
@@ -129,7 +129,7 @@ public class ProxySettingsEntry : SettingsEntry
         }
         catch
         {
-            this.proxyStatus = $"无效";
+            this.proxyStatus = $"無效";
         }
     }
 }

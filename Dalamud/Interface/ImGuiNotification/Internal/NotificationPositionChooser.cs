@@ -82,9 +82,9 @@ internal class NotificationPositionChooser
         // In the middle of the screen, draw some instructions
         string[] instructions =
         [
-            "上下移动鼠标以修改 Dalamud 通知信息出现的位置",
-            "单击左键以确认当前位置",
-            "单击右键以直接退出编辑状态"
+            "請拖曳「通知」到你希望顯示的位置",
+            "點擊左鍵，可儲存當前位置",
+            "點擊右鍵，可退出編輯狀態"
         ];
 
         var dl = ImGui.GetWindowDrawList();

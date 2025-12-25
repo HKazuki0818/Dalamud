@@ -91,8 +91,8 @@ public class SettingsTabGeneral : SettingsTab
         var config      = Service<DalamudConfiguration>.Get();
         var mainRepoUrl = config.MainRepoUrl;
         
-        ImGui.Text("默认主库");
-        if (ImGui.RadioButton("国服 (DailyRoutines)", mainRepoUrl == PluginRepository.MainRepoUrlDailyRoutines))
+        ImGui.Text("預設插件主庫");
+        if (ImGui.RadioButton("DailyRoutines", mainRepoUrl == PluginRepository.MainRepoUrlDailyRoutines))
         {
             config.MainRepoUrl = PluginRepository.MainRepoUrlDailyRoutines;
             config.QueueSave();
@@ -101,7 +101,7 @@ public class SettingsTabGeneral : SettingsTab
         }
         
         ImGui.SameLine();
-        if (ImGui.RadioButton("国际服 (goatcorp)", mainRepoUrl == PluginRepository.MainRepoUrlGoatCorp))
+        if (ImGui.RadioButton("國際服 (goatcorp)", mainRepoUrl == PluginRepository.MainRepoUrlGoatCorp))
         {
             config.MainRepoUrl = PluginRepository.MainRepoUrlGoatCorp;
             config.QueueSave();
@@ -110,7 +110,7 @@ public class SettingsTabGeneral : SettingsTab
         }
         
         ImGui.AlignTextToFramePadding();
-        ImGui.Text("自定义:");
+        ImGui.Text("自定義：");
         
         ImGui.SameLine();
         ImGui.SetNextItemWidth(500f * ImGuiHelpers.GlobalScale);
@@ -127,7 +127,7 @@ public class SettingsTabGeneral : SettingsTab
             _ = Service<PluginManager>.Get().ReloadPluginMastersAsync();
         }
         
-        ImGui.TextDisabled("选择 Dalamud 默认将会加载的主库, 你也可以选择自定义主库 (请注意 API 版本)");
+        ImGui.TextDisabled("選擇Dalamud預設會載入的插件主庫，當然你也可以選擇自定義主庫 (請注意 API 版本)");
         
         ImGuiHelpers.ScaledDummy(20);
         

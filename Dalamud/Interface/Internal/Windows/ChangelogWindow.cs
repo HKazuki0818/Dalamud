@@ -40,11 +40,11 @@ internal sealed class ChangelogWindow : Window, IDisposable
     private const string WarrantsChangelogForMajorMinor = "10.0.";
     
     private const string ChangeLog =
-        @"• 更新了 Dalamud 以兼容版本 7.0
-• 进行了大量幕后更改，使 Dalamud 和插件更加稳定可靠
-• 添加了开发人员可以利用的新功能
-• 重新设计了 Dalamud/插件安装程序 UI
-• 将Roaming文件夹重新放回了AppData中
+        @"• 更新了 Dalamud 以相容版本 7.0
+• 進行了大量幕後更改，使 Dalamud 和插件更加穩定可靠
+• 添加了開發人員可以利用的新功能
+• 重新設計了 Dalamud/插件安裝程式 UI
+• 將Roaming資料夾重新放回了AppData中
 ";
 
     private static readonly TimeSpan TitleScreenWaitTime = TimeSpan.FromSeconds(0.5f); 
@@ -398,13 +398,13 @@ internal sealed class ChangelogWindow : Window, IDisposable
                         break;
                     
                     case State.ExplainerApiBump:
-                        ImGui.TextWrapped("注意了！由于此补丁的更改，所有插件都需要更新，并已自动禁用");
-                        ImGui.TextWrapped("这是正常情况，也是进行重大游戏更新所必需的。");
+                        ImGui.TextWrapped("注意了！由於此補丁的更改，所有插件都需要更新，並已自動停用");
+                        ImGui.TextWrapped("這是正常情況，也是進行重大遊戲更新所必需的。");
                         ImGuiHelpers.ScaledDummy(5);
-                        ImGui.TextWrapped("要更新插件，请打开插件安装程序，然后点击“更新插件”。更新后的插件应会自动更新并重新启用。");
+                        ImGui.TextWrapped("要更新插件，請打開插件安裝程式，然後點擊“更新插件”。更新後的插件應會自動更新並重新啟用。");
                         ImGuiHelpers.ScaledDummy(5);
-                        ImGui.TextWrapped("请记住，并非你所有的插件都可能已经针对新版本进行了更新。");
-                        ImGui.TextWrapped("如果在“已安装插件”选项卡中显示某些插件带有红色叉号，那么它们可能还不可用。");
+                        ImGui.TextWrapped("請記住，並非你所有的插件都可能已經針對新版本進行了更新。");
+                        ImGui.TextWrapped("如果在“已安裝插件”選項卡中顯示某些插件帶有紅色叉號，那麼它們可能還不可用。");
                         
                         ImGuiHelpers.ScaledDummy(15);
 
@@ -428,11 +428,11 @@ internal sealed class ChangelogWindow : Window, IDisposable
                         break;
                     
                     case State.AskAutoUpdate:
-                        ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudWhite, "Dalamud 可以自动更新你的插件，确保你始终拥有最新的功能和错误修复。你可以在此处选择何时以及如何运行自动更新。");
+                        ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudWhite, "Dalamud 可以自動更新你的插件，確保你始終擁有最新的功能和錯誤修復。你可以在此處選擇何時以及如何運行自動更新。");
                         ImGuiHelpers.ScaledDummy(2);
                         
-                        ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudGrey, "你始终可以通过单击插件列表中的更新按钮来手动更新插件。你还可以通过右键单击特定插件并选择“始终自动更新”来选择更新特定插件。");
-                        ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudGrey, "Dalamud 只会在你处于休闲状态下通知你更新。");
+                        ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudGrey, "你始終可以通過按一下插件清單中的更新按鈕來手動更新插件。你還可以通過按右鍵特定插件並選擇“始終自動更新”來選擇更新特定插件。");
+                        ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudGrey, "Dalamud 只會在你處於休閒狀態下通知你更新。");
                         
                         ImGuiHelpers.ScaledDummy(15);
                         
@@ -448,7 +448,7 @@ internal sealed class ChangelogWindow : Window, IDisposable
 
                         using (ImRaii.PushColor(ImGuiCol.Button, ImGuiColors.DPSRed))
                         {
-                            if (DrawCenteredButton("启用自动更新", 30))
+                            if (DrawCenteredButton("開啟自動更新", 30))
                             { 
                                 this.chosenAutoUpdateBehavior = AutoUpdateBehavior.UpdateMainRepo;
                                 GoToNextState(State.Links);
@@ -461,7 +461,7 @@ internal sealed class ChangelogWindow : Window, IDisposable
                         using (var buttonColor = ImRaii.PushColor(ImGuiCol.Button, Vector4.Zero))
                         {
                             buttonColor.Push(ImGuiCol.Border, ImGuiColors.DalamudGrey3);
-                            if (DrawCenteredButton("禁用自动更新", 25))
+                            if (DrawCenteredButton("關閉自動更新", 25))
                             { 
                                 this.chosenAutoUpdateBehavior = AutoUpdateBehavior.OnlyNotify;
                                 GoToNextState(State.Links);
@@ -471,8 +471,8 @@ internal sealed class ChangelogWindow : Window, IDisposable
                         break;
                     
                     case State.Links:
-                        ImGui.TextWrapped("如果你注意到任何问题或需要帮助，请查看常见问题解答，并在需要帮助的情况下在我们的Discord上联系我们。");
-                        ImGui.TextWrapped("祝你享受游戏和 Dalamud 的时光！");
+                        ImGui.TextWrapped("如果你注意到任何問題或需要幫助，請查看常見問題解答，並在需要幫助的情況下在我們的Discord上聯繫我們。");
+                        ImGui.TextWrapped("祝你享受遊戲和 Dalamud 的時光！");
                         
                         ImGuiHelpers.ScaledDummy(45);
                         
@@ -494,7 +494,7 @@ internal sealed class ChangelogWindow : Window, IDisposable
                         
                         ImGuiHelpers.CenterCursorFor(
                             (int)(ImGuiComponents.GetIconButtonWithTextWidth(FontAwesomeIcon.Globe, "查看 FAQ") +
-                            ImGuiComponents.GetIconButtonWithTextWidth(FontAwesomeIcon.LaughBeam, "加入我们的Discord") +
+                            ImGuiComponents.GetIconButtonWithTextWidth(FontAwesomeIcon.LaughBeam, "加入我們的Discord") +
                             (5 * ImGuiHelpers.GlobalScale) + 
                             (ImGui.GetStyle().ItemSpacing.X * 4)));
                         if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.Globe, "查看 FAQ"))
@@ -506,20 +506,20 @@ internal sealed class ChangelogWindow : Window, IDisposable
                         ImGuiHelpers.ScaledDummy(5);
                         ImGui.SameLine();
                         
-                        if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.LaughBeam, "加入我们的Discord"))
+                        if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.LaughBeam, "加入我們的Discord"))
                         {
                             Util.OpenLink("https://discord.gg/dailyroutines");
                         }
                         
                         ImGuiHelpers.ScaledDummy(5);
                         
-                        if (CenteredIconButton(FontAwesomeIcon.Heart, "支持我们"))
+                        if (CenteredIconButton(FontAwesomeIcon.Heart, "支持我們"))
                         {
                             Util.OpenLink("https://info.atmoomen.top/");
                         }
                         
                         var buttonHeight = 30 * ImGuiHelpers.GlobalScale;
-                        var buttonText = "关闭";
+                        var buttonText = "關閉";
                         var buttonWidth = ImGui.CalcTextSize(buttonText).X + 40 * ImGuiHelpers.GlobalScale;
                         ImGui.SetCursorPosY(windowSize.Y - buttonHeight - (20 * ImGuiHelpers.GlobalScale));
                         ImGuiHelpers.CenterCursorFor((int)buttonWidth);

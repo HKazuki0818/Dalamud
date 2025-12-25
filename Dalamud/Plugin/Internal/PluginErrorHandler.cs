@@ -97,7 +97,7 @@ internal class PluginErrorHandler : IServiceType
 
         this.lastErrorTime = now;
 
-        var creatingErrorsText = $"{devPlugin.Name} 正在输出错误日志";
+        var creatingErrorsText = $"{devPlugin.Name} 正在輸出錯誤日誌";
         var notification = new Notification()
         {
             Title = creatingErrorsText,
@@ -105,15 +105,15 @@ internal class PluginErrorHandler : IServiceType
             Type = NotificationType.Error,
             InitialDuration = TimeSpan.FromSeconds(15),
             MinimizedText = creatingErrorsText,
-            Content = $"插件 '{devPlugin.Name}' 正在输出错误日志。点击 '显示控制台' 按钮查看详情\n\n" +
-                      $"显示本消息是因为 '{devPlugin.Name}' 为本地插件",
+            Content = $"插件 '{devPlugin.Name}' 正在輸出錯誤日誌。點擊 '顯示控制台' 按鈕查看詳情\n\n" +
+                      $"顯示本消息是因為 '{devPlugin.Name}' 為本地插件",
             RespectUiHidden = false,
         };
 
         this.activeNotification = this.notificationManager.AddNotification(notification);
         this.activeNotification.DrawActions += _ =>
         {
-            if (ImGui.Button("显示控制台"))
+            if (ImGui.Button("顯示控制台"))
             {
                 this.di.OpenLogWindow(this.plugin.InternalName);
                 this.activeNotification.DismissNow();
@@ -121,12 +121,12 @@ internal class PluginErrorHandler : IServiceType
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("显示此插件相关的控制台日志");
+                ImGui.SetTooltip("顯示此插件的控制台");
             }
 
             ImGui.SameLine();
 
-            if (ImGui.Button("禁用此插件的错误通知"))
+            if (ImGui.Button("停用錯誤通知"))
             {
                 devPlugin.NotifyForErrors = false;
                 this.activeNotification.DismissNow();
@@ -134,7 +134,7 @@ internal class PluginErrorHandler : IServiceType
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("临时禁用此插件的错误日志通知");
+                ImGui.SetTooltip("停用此插件的錯誤通知");
             }
         };
     }

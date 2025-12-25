@@ -30,59 +30,59 @@ public class SettingsTabAutoUpdates : SettingsTab
 
     public override SettingsEntry[] Entries { get; } = [];
 
-    public override string Title => Loc.Localize("DalamudSettingsAutoUpdates", "自动更新");
+    public override string Title => Loc.Localize("DalamudSettingsAutoUpdates", "Auto-Updates");
 
     public override void Draw()
     {
         ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudWhite, Loc.Localize("DalamudSettingsAutoUpdateHint",
-                                                "Dalamud 可以自动更新你的插件，确保你始终" +
-                                                "能获得最新功能和错误修复。可以在此设置自动更新的时机和方式。"));
+                                                "Dalamud can update your plugins automatically, making sure that you always " +
+                                                "have the newest features and bug fixes. You can choose when and how auto-updates are run here."));
         ImGuiHelpers.ScaledDummy(2);
 
         ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudGrey, Loc.Localize("DalamudSettingsAutoUpdateDisclaimer1",
-                                                "你始终可以通过插件列表中的更新按钮手动更新插件。" +
-                                                "也可右键单击插件并选择\"始终自动更新\"来为特定插件启用自动更新。"));
+                                                "You can always update your plugins manually by clicking the update button in the plugin list. " +
+                                                "You can also opt into updates for specific plugins by right-clicking them and selecting \"Always auto-update\"."));
         ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudGrey, Loc.Localize("DalamudSettingsAutoUpdateDisclaimer2",
-                                                "Dalamud 只会在你处于空闲状态时通知更新。"));
+                                                "Dalamud will only notify you about updates while you are idle."));
 
         ImGuiHelpers.ScaledDummy(8);
 
         ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudWhite, Loc.Localize("DalamudSettingsAutoUpdateBehavior",
-                                                "当游戏启动时..."));
+                                                "When the game starts..."));
         var behaviorInt = (int)this.behavior;
-        ImGui.RadioButton(Loc.Localize("DalamudSettingsAutoUpdateNone", "不自动检查更新"), ref behaviorInt, (int)AutoUpdateBehavior.None);
-        ImGui.RadioButton(Loc.Localize("DalamudSettingsAutoUpdateNotify", "仅通知新更新"), ref behaviorInt, (int)AutoUpdateBehavior.OnlyNotify);
-        ImGui.RadioButton(Loc.Localize("DalamudSettingsAutoUpdateMainRepo", "自动更新主库插件"), ref behaviorInt, (int)AutoUpdateBehavior.UpdateMainRepo);
-        ImGui.RadioButton(Loc.Localize("DalamudSettingsAutoUpdateAll", "自动更新所有插件"), ref behaviorInt, (int)AutoUpdateBehavior.UpdateAll);
+        ImGui.RadioButton(Loc.Localize("DalamudSettingsAutoUpdateNone", "Do not check for updates automatically"), ref behaviorInt, (int)AutoUpdateBehavior.None);
+        ImGui.RadioButton(Loc.Localize("DalamudSettingsAutoUpdateNotify", "Only notify me of new updates"), ref behaviorInt, (int)AutoUpdateBehavior.OnlyNotify);
+        ImGui.RadioButton(Loc.Localize("DalamudSettingsAutoUpdateMainRepo", "Auto-update main repository plugins"), ref behaviorInt, (int)AutoUpdateBehavior.UpdateMainRepo);
+        ImGui.RadioButton(Loc.Localize("DalamudSettingsAutoUpdateAll", "Auto-update all plugins"), ref behaviorInt, (int)AutoUpdateBehavior.UpdateAll);
         this.behavior = (AutoUpdateBehavior)behaviorInt;
 
         if (this.behavior == AutoUpdateBehavior.UpdateAll)
         {
             var warning = Loc.Localize(
                 "DalamudSettingsAutoUpdateAllWarning",
-                "警告：这将更新所有插件，包括非主库来源的插件。\n" +
-                "这些更新未经 Dalamud 团队审核，可能包含恶意代码。");
+                "Warning: This will update all plugins, including those not from the main repository.\n" +
+                "These updates are not reviewed by the Dalamud team and may contain malicious code.");
             ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudOrange, warning);
         }
 
         ImGuiHelpers.ScaledDummy(8);
 
-        ImGui.Checkbox(Loc.Localize("DalamudSettingsAutoUpdateDisabledPlugins", "自动更新当时被禁用的插件"), ref this.updateDisabledPlugins);
-        ImGui.Checkbox(Loc.Localize("DalamudSettingsAutoUpdateChatMessage", "在聊天栏显示可用更新通知"), ref this.chatNotification);
-        ImGui.Checkbox(Loc.Localize("DalamudSettingsAutoUpdatePeriodically", "游戏运行时定期检查更新"), ref this.checkPeriodically);
+        ImGui.Checkbox(Loc.Localize("DalamudSettingsAutoUpdateDisabledPlugins", "Auto-Update plugins that are currently disabled"), ref this.updateDisabledPlugins);
+        ImGui.Checkbox(Loc.Localize("DalamudSettingsAutoUpdateChatMessage", "Show notification about updates available in chat"), ref this.chatNotification);
+        ImGui.Checkbox(Loc.Localize("DalamudSettingsAutoUpdatePeriodically", "Periodically check for new updates while playing"), ref this.checkPeriodically);
         ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudGrey, Loc.Localize("DalamudSettingsAutoUpdatePeriodicallyHint",
-                                                "启动后不会自动更新插件，仅在你未活跃游戏时接收通知。"));
+                                                "Plugins won't update automatically after startup, you will only receive a notification while you are not actively playing."));
 
         ImGuiHelpers.ScaledDummy(5);
         ImGui.Separator();
         ImGuiHelpers.ScaledDummy(5);
 
         ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudWhite, Loc.Localize("DalamudSettingsAutoUpdateOptedIn",
-                                                "插件单独设置"));
+                                                "Per-plugin overrides"));
 
         ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudWhite, Loc.Localize("DalamudSettingsAutoUpdateOverrideHint",
-                                                "在此可为特定插件单独设置是否接收更新，" +
-                                                "这将覆盖上述全局设置。"));
+                                                "Here, you can choose to receive or not to receive updates for specific plugins. " +
+                                                "This will override the settings above for the selected plugins."));
 
         if (this.autoUpdatePreferences.Count == 0)
         {
@@ -91,7 +91,7 @@ public class SettingsTabAutoUpdates : SettingsTab
             using (ImRaii.PushColor(ImGuiCol.Text, ImGuiColors.DalamudGrey))
             {
                 ImGuiHelpers.CenteredText(Loc.Localize("DalamudSettingsAutoUpdateOptedInHint2",
-                                                       "你尚未为任何插件配置自动更新规则"));
+                                                       "You don't have auto-update rules for any plugins."));
             }
 
             ImGuiHelpers.ScaledDummy(2);
@@ -132,7 +132,7 @@ public class SettingsTabAutoUpdates : SettingsTab
 
                     ImGui.SameLine();
 
-                    var text = $"{pmPlugin.Name}{(pmPlugin.IsDev ? " (开发版插件" : string.Empty)}";
+                    var text = $"{pmPlugin.Name}{(pmPlugin.IsDev ? " (開發版插件" : string.Empty)}";
                     var textHeight = ImGui.CalcTextSize(text);
                     var before = ImGui.GetCursorPos();
 
@@ -146,7 +146,7 @@ public class SettingsTabAutoUpdates : SettingsTab
                     ImGui.Image(pic.DefaultIcon.ImGuiHandle, new Vector2(pluginLineHeight));
                     ImGui.SameLine();
 
-                    var text = Loc.Localize("DalamudSettingsAutoUpdateOptInUnknownPlugin", "未知插件");
+                    var text = Loc.Localize("DalamudSettingsAutoUpdateOptInUnknownPlugin", "Unknown plugin");
                     var textHeight = ImGui.CalcTextSize(text);
                     var before = ImGui.GetCursorPos();
 
@@ -164,8 +164,8 @@ public class SettingsTabAutoUpdates : SettingsTab
                 {
                     return kind switch
                     {
-                        AutoUpdatePreference.OptKind.NeverUpdate => Loc.Localize("DalamudSettingsAutoUpdateOptInNeverUpdate", "从不更新"),
-                        AutoUpdatePreference.OptKind.AlwaysUpdate => Loc.Localize("DalamudSettingsAutoUpdateOptInAlwaysUpdate", "总是更新"),
+                        AutoUpdatePreference.OptKind.NeverUpdate => Loc.Localize("DalamudSettingsAutoUpdateOptInNeverUpdate", "Never update this"),
+                        AutoUpdatePreference.OptKind.AlwaysUpdate => Loc.Localize("DalamudSettingsAutoUpdateOptInAlwaysUpdate", "Always update this"),
                         _ => throw new ArgumentOutOfRangeException(),
                     };
                 }
@@ -195,7 +195,7 @@ public class SettingsTabAutoUpdates : SettingsTab
                 }
 
                 if (ImGui.IsItemHovered())
-                    ImGui.SetTooltip(Loc.Localize("DalamudSettingsAutoUpdateOptInRemove", "移除规则"));
+                    ImGui.SetTooltip(Loc.Localize("DalamudSettingsAutoUpdateOptInRemove", "Remove this override"));
             }
 
             if (wantRemovePluginGuid != null)
@@ -223,7 +223,7 @@ public class SettingsTabAutoUpdates : SettingsTab
             "###autoUpdatePicker", ref this.pickerSearch, OnPluginPicked, IsPluginDisabled, IsPluginFiltered);
 
         const FontAwesomeIcon addButtonIcon = FontAwesomeIcon.Plus;
-        var addButtonText = Loc.Localize("DalamudSettingsAutoUpdateOptInAdd", "添加规则");
+        var addButtonText = Loc.Localize("DalamudSettingsAutoUpdateOptInAdd", "Add new override");
         ImGuiHelpers.CenterCursorFor(ImGuiComponents.GetIconButtonWithTextWidth(addButtonIcon, addButtonText));
         if (ImGuiComponents.IconButtonWithText(addButtonIcon, addButtonText))
         {
