@@ -49,7 +49,7 @@ public class ProxySettingsEntry : SettingsEntry
     {
         ImGui.Text("代理設置");
         
-        ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudRed, "設置Dalamud所使用的網路代理，會影響到插件庫的連接，保存後重啟遊戲生效");
+        ImGuiHelpers.SafeTextColoredWrapped(ImGuiColors.DalamudRed, "設置 Dalamud 所使用的網路代理，會影響到插件倉庫的連接，保存後重啟遊戲生效");
         
         ImGui.Checkbox("手動配置代理", ref this.useManualProxy);
         

@@ -744,7 +744,7 @@ internal class DalamudInterface : IInternalDisposableService
                         this.OpenChangelogWindow();
                     }
 
-                    if (ImGui.MenuItem("預設ImGui組件"))
+                    if (ImGui.MenuItem("預設 ImGui 組件"))
                     {
                         this.OpenComponentDemoWindow();
                     }
@@ -769,7 +769,7 @@ internal class DalamudInterface : IInternalDisposableService
                         this.OpenProfiler();
                     }
 
-                    if (ImGui.MenuItem("Hitch設置"))
+                    if (ImGui.MenuItem("Hitch 設置"))
                     {
                         this.OpenHitchSettings();
                     }
@@ -781,7 +781,7 @@ internal class DalamudInterface : IInternalDisposableService
 
                     ImGui.Separator();
 
-                    if (ImGui.MenuItem("卸載Dalamud"))
+                    if (ImGui.MenuItem("卸載 Dalamud"))
                     {
                         Service<Dalamud>.Get().Unload();
                     }
@@ -1059,7 +1059,7 @@ internal class DalamudInterface : IInternalDisposableService
                 }
 
                 if (Service<GameGui>.Get().GameUiHidden)
-                    ImGui.BeginMenu("UI隱藏中...", false);
+                    ImGui.BeginMenu("UI 隱藏中...", false);
 
                 if (this.configuration.ShowDevBarInfo)
                 {

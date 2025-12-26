@@ -43,8 +43,8 @@ internal sealed class ChangelogWindow : Window, IDisposable
         @"• 更新了 Dalamud 以相容版本 7.0
 • 進行了大量幕後更改，使 Dalamud 和插件更加穩定可靠
 • 添加了開發人員可以利用的新功能
-• 重新設計了 Dalamud/插件安裝程式 UI
-• 將Roaming資料夾重新放回了AppData中
+• 重新設計了 Dalamud / 插件安裝程式 UI
+• 將 Roaming 資料夾重新放回了 AppData 中
 ";
 
     private static readonly TimeSpan TitleScreenWaitTime = TimeSpan.FromSeconds(0.5f); 
@@ -471,7 +471,7 @@ internal sealed class ChangelogWindow : Window, IDisposable
                         break;
                     
                     case State.Links:
-                        ImGui.TextWrapped("如果你注意到任何問題或需要幫助，請查看常見問題解答，並在需要幫助的情況下在我們的Discord上聯繫我們。");
+                        ImGui.TextWrapped("如果你注意到任何問題或需要幫助，請查看常見問題解答，並在需要幫助的情況下在我們的 Discord 上聯繫我們。");
                         ImGui.TextWrapped("祝你享受遊戲和 Dalamud 的時光！");
                         
                         ImGuiHelpers.ScaledDummy(45);
@@ -494,7 +494,7 @@ internal sealed class ChangelogWindow : Window, IDisposable
                         
                         ImGuiHelpers.CenterCursorFor(
                             (int)(ImGuiComponents.GetIconButtonWithTextWidth(FontAwesomeIcon.Globe, "查看 FAQ") +
-                            ImGuiComponents.GetIconButtonWithTextWidth(FontAwesomeIcon.LaughBeam, "加入我們的Discord") +
+                            ImGuiComponents.GetIconButtonWithTextWidth(FontAwesomeIcon.LaughBeam, "加入我們的 Discord") +
                             (5 * ImGuiHelpers.GlobalScale) + 
                             (ImGui.GetStyle().ItemSpacing.X * 4)));
                         if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.Globe, "查看 FAQ"))
@@ -506,7 +506,7 @@ internal sealed class ChangelogWindow : Window, IDisposable
                         ImGuiHelpers.ScaledDummy(5);
                         ImGui.SameLine();
                         
-                        if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.LaughBeam, "加入我們的Discord"))
+                        if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.LaughBeam, "加入我們的 Discord"))
                         {
                             Util.OpenLink("https://discord.gg/dailyroutines");
                         }
