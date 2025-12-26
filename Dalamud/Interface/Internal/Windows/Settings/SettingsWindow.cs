@@ -180,7 +180,7 @@ internal class SettingsWindow : Window
             }
             else
             {
-                if (ImGui.BeginTabItem("搜索结果"))
+                if (ImGui.BeginTabItem("搜尋結果"))
                 {
                     var any = false;
 
@@ -208,7 +208,7 @@ internal class SettingsWindow : Window
                     }
 
                     if (!any)
-                        ImGui.TextColored(ImGuiColors.DalamudGrey, "无搜索结果");
+                        ImGui.TextColored(ImGuiColors.DalamudGrey, "無任何搜尋結果...");
 
                     ImGui.EndTabItem();
                 }
@@ -249,7 +249,7 @@ internal class SettingsWindow : Window
 
         ImGui.SetCursorPos(new Vector2(windowSize.X - 250, ImGui.GetTextLineHeightWithSpacing() + (ImGui.GetStyle().FramePadding.Y * 2)));
         ImGui.SetNextItemWidth(240);
-        ImGui.InputTextWithHint("###searchInput", "搜索设置...", ref this.searchInput, 100);
+        ImGui.InputTextWithHint("###searchInput", "搜尋設置...", ref this.searchInput, 100);
     }
 
     private void Save()

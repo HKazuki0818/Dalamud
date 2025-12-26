@@ -18,7 +18,7 @@ public class Localization : IServiceType
     /// <summary>
     /// Array of language codes which have a valid translation in Dalamud.
     /// </summary>
-    public static readonly string[] ApplicableLangCodes = { "de", "ja", "fr", "it", "es", "zh" };
+    public static readonly string[] ApplicableLangCodes = { "de", "ja", "fr", "it", "es", "ko", "no", "ru", "zh", "tw"  };
 
     private const string FallbackLangCode = "en";
 
@@ -117,8 +117,20 @@ public class Localization : IServiceType
     public void SetupWithFallbacks()
     {
         this.DalamudLanguageCultureInfo = CultureInfo.InvariantCulture;
-        this.LocalizationChanged?.Invoke(FallbackLangCode);
+
         Loc.SetupWithFallbacks(this.assembly);
+
+        foreach (var d in Delegate.EnumerateInvocationList(this.LocalizationChanged))
+        {
+            try
+            {
+                d(FallbackLangCode);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Exception during raise of {handler}", d.Method);
+            }
+        }
     }
 
     /// <summary>
@@ -134,7 +146,6 @@ public class Localization : IServiceType
         }
 
         this.DalamudLanguageCultureInfo = GetCultureInfoFromLangCode(langCode);
-        this.LocalizationChanged?.Invoke(langCode);
 
         try
         {
@@ -144,6 +155,18 @@ public class Localization : IServiceType
         {
             Log.Error(ex, "Could not load loc {0}. Setting up fallbacks.", langCode);
             this.SetupWithFallbacks();
+        }
+
+        foreach (var d in Delegate.EnumerateInvocationList(this.LocalizationChanged))
+        {
+            try
+            {
+                d(langCode);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Exception during raise of {handler}", d.Method);
+            }
         }
     }
 

@@ -346,7 +346,7 @@ internal class ConsoleWindow : Window, IDisposable
 
         if (hadColor) ImGui.PopStyleColor();
 
-        if (ImGui.Button("发送", sendButtonSize))
+        if (ImGui.Button("發送", sendButtonSize))
         {
             this.ProcessCommand();
         }
@@ -354,13 +354,13 @@ internal class ConsoleWindow : Window, IDisposable
 
     private static string GetTextForLogEventLevel(LogEventLevel level) => level switch
     {
-        LogEventLevel.Error       => "错误", // Error
-        LogEventLevel.Verbose     => "冗长", // Verbose
-        LogEventLevel.Debug       => "调试", // Debug
+        LogEventLevel.Error       => "錯誤", // Error
+        LogEventLevel.Verbose     => "冗長", // Verbose
+        LogEventLevel.Debug       => "調試", // Debug
         LogEventLevel.Information => "信息", // Information
         LogEventLevel.Warning     => "警告", // Warning
         LogEventLevel.Fatal       => "致命", // Fatal
-        _                         => "未知", // 未知级别
+        _                         => "未知", // 未知級別
     };
 
     private static uint GetColorForLogEventLevel(LogEventLevel level) => level switch
@@ -470,7 +470,7 @@ internal class ConsoleWindow : Window, IDisposable
             new()
             {
                 Title = this.WindowName,
-                Content = $"复制了 {n:n0} 行日志",
+                Content = $"複製了 {n:n0} 行日誌",
                 Type = NotificationType.Success,
             });
     }
@@ -510,14 +510,14 @@ internal class ConsoleWindow : Window, IDisposable
 
         this.settingsPopupWasOpen = settingsPopup;
 
-        if (this.DrawToggleButtonWithTooltip("show_settings", "显示设置", FontAwesomeIcon.List, ref settingsPopup))
+        if (this.DrawToggleButtonWithTooltip("show_settings", "顯示設置", FontAwesomeIcon.List, ref settingsPopup))
             ImGui.OpenPopup("##console_settings");
 
         ImGui.SameLine();
 
         if (this.DrawToggleButtonWithTooltip(
                 "show_filters",
-                "显示搜索工具栏",
+                "顯示搜尋工具欄",
                 FontAwesomeIcon.Search,
                 ref this.showFilterToolbar))
         {
@@ -528,7 +528,7 @@ internal class ConsoleWindow : Window, IDisposable
 
         if (this.DrawToggleButtonWithTooltip(
                 "show_uncaught_exceptions",
-                "搜索时显示未捕获的异常",
+                "搜尋時顯示未捕獲的異常",
                 FontAwesomeIcon.Bug,
                 ref this.filterShowUncaughtExceptions))
         {
@@ -542,13 +542,13 @@ internal class ConsoleWindow : Window, IDisposable
             this.QueueClear();
         }
 
-        if (ImGui.IsItemHovered()) ImGui.SetTooltip("清除日志");
+        if (ImGui.IsItemHovered()) ImGui.SetTooltip("清除日誌");
 
         ImGui.SameLine();
 
         if (this.DrawToggleButtonWithTooltip(
                 "copy_mode",
-                "启用复制模式\n右键单击以复制全部日志",
+                "啟用複製模式\n點擊右鍵以複製全部日誌",
                 FontAwesomeIcon.Copy,
                 ref this.copyMode))
         {
@@ -578,7 +578,7 @@ internal class ConsoleWindow : Window, IDisposable
                 this.killGameArmed = true;
         }
 
-        if (ImGui.IsItemHovered()) ImGui.SetTooltip("关闭游戏");
+        if (ImGui.IsItemHovered()) ImGui.SetTooltip("關閉遊戲");
 
         ImGui.SameLine();
 
@@ -601,7 +601,7 @@ internal class ConsoleWindow : Window, IDisposable
         ImGui.PushItemWidth(inputWidth);
         if (ImGui.InputTextWithHint(
                 "##textHighlight",
-                "高亮显示 (正则匹配)",
+                "高亮顯示 (正則匹配)",
                 ref this.textHighlight,
                 2048,
                 ImGuiInputTextFlags.EnterReturnsTrue | ImGuiInputTextFlags.AutoSelectAll)
@@ -629,7 +629,7 @@ internal class ConsoleWindow : Window, IDisposable
         ImGui.PushItemWidth(inputWidth);
         if (ImGui.InputTextWithHint(
                 "##textFilter",
-                "搜索 (正则匹配)",
+                "搜尋 (正則匹配)",
                 ref this.textFilter,
                 2048,
                 ImGuiInputTextFlags.EnterReturnsTrue | ImGuiInputTextFlags.AutoSelectAll)
