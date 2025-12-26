@@ -91,7 +91,7 @@ public class SettingsTabGeneral : SettingsTab
         var config      = Service<DalamudConfiguration>.Get();
         var mainRepoUrl = config.MainRepoUrl;
         
-        ImGui.Text("預設插件主庫");
+        ImGui.Text("預設插件倉庫");
         if (ImGui.RadioButton("DailyRoutines", mainRepoUrl == PluginRepository.MainRepoUrlDailyRoutines))
         {
             config.MainRepoUrl = PluginRepository.MainRepoUrlDailyRoutines;
@@ -127,7 +127,7 @@ public class SettingsTabGeneral : SettingsTab
             _ = Service<PluginManager>.Get().ReloadPluginMastersAsync();
         }
         
-        ImGui.TextDisabled("選擇Dalamud預設會載入的插件主庫，當然你也可以選擇自定義主庫 (請注意 API 版本)");
+        ImGui.TextDisabled("選擇 Dalamud 預設會載入的插件倉庫，當然你也可以選擇自定義插件倉庫 (請注意 API 版本)");
         
         ImGuiHelpers.ScaledDummy(20);
         
