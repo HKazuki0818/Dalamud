@@ -26,11 +26,17 @@ internal class PluginRepository
     
     public const string MainRepoUrlDailyRoutines = "https://raw.githubusercontent.com/yanmucorp/PluginDistD17/refs/heads/main/pluginmaster.json";
     public const string MainRepoUrlGoatCorp = "https://kamori.goats.dev/Plugin/PluginMaster";
-
+    
     public static string MainRepoUrl => Service<DalamudConfiguration>.Get().MainRepoUrl;
 
     public const string MainRepoDRUrl = "https://raw.githubusercontent.com/yanmucorp/PluginDistD17/refs/heads/main/pluginmaster.json";
 
+    private static readonly List<string> InvalidRepos =
+    [
+        "https://aonyx.ffxiv.wang/Plugin/PluginMaster",
+        "https://gh.atmoomen.top/https://raw.githubusercontent.com/Dalamud-DailyRoutines/PluginDistD17/main/pluginmaster.json"
+    ];
+    
     private const int HttpRequestTimeoutSeconds = 20;
 
     private static readonly ModuleLog Log = new("PLUGINR");
@@ -108,7 +114,7 @@ internal class PluginRepository
     {
         // 摊手.jpg
         var dalamudConfig = Service<DalamudConfiguration>.Get();
-        if (dalamudConfig.MainRepoUrl.Contains("https://aonyx.ffxiv.wang/Plugin/PluginMaster", StringComparison.OrdinalIgnoreCase))
+        if (InvalidRepos.Any(x => dalamudConfig.MainRepoUrl.Contains(x, StringComparison.OrdinalIgnoreCase)))
         {
             dalamudConfig.MainRepoUrl = MainRepoUrlDailyRoutines;
             dalamudConfig.QueueSave();
@@ -172,15 +178,15 @@ internal class PluginRepository
 
         if (manifest.Name.IsNullOrWhitespace())
         {
-            Log.Error("仓库 {RepoLink} 中的插件 {PluginName} 缺少有效的名称", manifest.InternalName, PluginMasterUrl);
+            Log.Error("仓库 {RepoLink} 中的插件 {PluginName} 缺少有效的名称", PluginMasterUrl, manifest.InternalName);
             return false;
         }
 
         // ReSharper disable once ConditionIsAlwaysTrueOrFalse
         if (manifest.AssemblyVersion == null)
         {
-            Log.Error("仓库 {RepoLink} 中的插件 {PluginName} 缺少有效的程序集版本", manifest.InternalName,
-                      PluginMasterUrl);
+            Log.Error("仓库 {RepoLink} 中的插件 {PluginName} 缺少有效的程序集版本", PluginMasterUrl,
+                      manifest.InternalName);
             return false;
         }
 
@@ -189,7 +195,7 @@ internal class PluginRepository
             manifest.TestingDalamudApiLevel == null)
             Log.Warning(
                 "仓库 {RepoLink} 中的插件 {PluginName} 有测试版本可用，但未指定测试API版本，需要提供 'TestingDalamudApiLevel' 属性",
-                manifest.InternalName, PluginMasterUrl);
+                PluginMasterUrl, manifest.InternalName);
 
         return true;
     }

@@ -1,13 +1,13 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 
 using CheapLoc;
+using Dalamud.Bindings.ImGui;
 using Dalamud.Configuration.Internal;
 using Dalamud.Game.Text;
 using Dalamud.Interface.Internal.Windows.Settings.Widgets;
 using Dalamud.Interface.Utility;
 using Dalamud.Plugin.Internal;
 using Dalamud.Plugin.Internal.Types;
-using ImGuiNET;
 
 namespace Dalamud.Interface.Internal.Windows.Settings.Tabs;
 
@@ -90,9 +90,11 @@ public class SettingsTabGeneral : SettingsTab
     {
         var config      = Service<DalamudConfiguration>.Get();
         var mainRepoUrl = config.MainRepoUrl;
+        var useSoilPluginManager = config.UseSoilPluginManager;
+
+        ImGui.Text("默认主库");
         
-        ImGui.Text("預設插件主庫");
-        if (ImGui.RadioButton("DailyRoutines", mainRepoUrl == PluginRepository.MainRepoUrlDailyRoutines))
+        if (ImGui.RadioButton("Daily Routines", mainRepoUrl == PluginRepository.MainRepoUrlDailyRoutines))
         {
             config.MainRepoUrl = PluginRepository.MainRepoUrlDailyRoutines;
             config.QueueSave();
@@ -100,8 +102,7 @@ public class SettingsTabGeneral : SettingsTab
             _ = Service<PluginManager>.Get().ReloadPluginMastersAsync();
         }
         
-        ImGui.SameLine();
-        if (ImGui.RadioButton("國際服 (goatcorp)", mainRepoUrl == PluginRepository.MainRepoUrlGoatCorp))
+        if (ImGui.RadioButton("国际服 (goatcorp)", mainRepoUrl == PluginRepository.MainRepoUrlGoatCorp))
         {
             config.MainRepoUrl = PluginRepository.MainRepoUrlGoatCorp;
             config.QueueSave();
@@ -130,7 +131,27 @@ public class SettingsTabGeneral : SettingsTab
         ImGui.TextDisabled("選擇Dalamud預設會載入的插件主庫，當然你也可以選擇自定義主庫 (請注意 API 版本)");
         
         ImGuiHelpers.ScaledDummy(20);
-        
+
+        ImGui.Text("插件库排序方式");
+
+        if (ImGui.RadioButton("使用库分类", useSoilPluginManager))
+        {
+            config.UseSoilPluginManager = true;
+            config.QueueSave();
+
+            _ = Service<PluginManager>.Get().ReloadPluginMastersAsync();
+        }
+
+        if (ImGui.RadioButton("使用默认分类", !useSoilPluginManager))
+        {
+            config.UseSoilPluginManager = false;
+            config.QueueSave();
+
+            _ = Service<PluginManager>.Get().ReloadPluginMastersAsync();
+        }
+
+        ImGuiHelpers.ScaledDummy(20);
+
         base.Draw();
     }
 }
