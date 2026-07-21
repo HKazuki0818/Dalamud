@@ -875,22 +875,9 @@ internal class DalamudInterface : IInternalDisposableService
 
                     ImGui.Separator();
 
-                    var showAsserts = this.interfaceManager.ShowAsserts;
-                    if (ImGui.MenuItem("启用断言弹出窗口"u8, (byte*)null, this.interfaceManager.ShowAsserts))
-                    {
-                        this.interfaceManager.ShowAsserts ^= true;
-                    }
-
                     if (ImGui.MenuItem("启用断言日志记录 (Verbose)"u8, (byte*)null, this.interfaceManager.EnableVerboseAssertLogging))
                     {
                         this.interfaceManager.EnableVerboseAssertLogging ^= true;
-                    }
-
-                    var assertsEnabled = this.configuration.ImGuiAssertsEnabledAtStartup ?? false;
-                    if (ImGui.MenuItem("在游戏开始时启用断言"u8, (byte*)null, assertsEnabled))
-                    {
-                        this.configuration.ImGuiAssertsEnabledAtStartup = !assertsEnabled;
-                        this.configuration.QueueSave();
                     }
 
                     ImGui.Separator();
